@@ -11,6 +11,7 @@ router.post('/v1/:id/test', (ctx, next) => {
   const body = ctx.request.body // 获取到{test: 2}
 
   ctx.body = { key: '获取参数成功' }
+  throw new Error('api 错误')
 })
 
 module.exports = router
