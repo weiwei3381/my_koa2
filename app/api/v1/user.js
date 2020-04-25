@@ -10,8 +10,16 @@ router.post('/v1/:id/test', (ctx, next) => {
   // 才能在request的body属性中获取值
   const body = ctx.request.body // 获取到{test: 2}
 
+  // 如果query为空对象, 则抛出相应错误
+  if (JSON.stringify(query) === '{}') {
+    // 创建error对象之后, 在上面挂载相应的状态
+    const error = new Error('错误信息')
+    error.errorCode = 10001
+    error.status = 400
+    error.requestUrl = `${ctx.method} ${ctx.path}`
+    throw error
+  }
   ctx.body = { key: '获取参数成功' }
-  throw new Error('api 错误')
 })
 
 module.exports = router
