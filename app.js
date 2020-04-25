@@ -1,25 +1,21 @@
 const Koa = require('koa')
 const app = new Koa()
 
-// 实现中间件, 每次访问都会调用打印
-// 在第一个中间件中调用第2个中间件
+// 第1个中间件
 app.use(async (ctx, next) => {
-  console.log('1')
   await next()
-  console.log('2')
+  // 在next之后,能保证后续代码已全部执行,才能拿到r
+  const r = ctx.r
+  console.log(r)
 })
 
-// 定义第2个中间件
+// 第2个中间件
 app.use(async (ctx, next) => {
-  //   console.log(3)
   const axios = require('axios')
-  const start = Date.now()
-  const res = await axios.get('https://www.taobao.com')
-  const end = Date.now()
-  console.log(`阻塞之后的延时为:${end - start}`)
-  console.log(res)
-
-  //   console.log(4)
+  const res = await axios.get('https://api.uomg.com/api/rand.qinghua')
+  // 将返回值挂载到ctx.r上
+  ctx.r = res
+  await next()
 })
 
 // 监听3000端口
