@@ -1,22 +1,19 @@
 const Router = require('koa-router')
+// 导入自定义Http异常类
+const { HttpException } = require('../../../core/http-exception')
 
 const router = new Router() // 实例化router
 
 router.post('/v1/:id/test', (ctx, next) => {
-  const path = ctx.params // 获取到{id:"1"}
-  const query = ctx.request.query // 获取到{param:"weiwei"}
-  const headers = ctx.request.header // 对象包含很多属性, 其中token属性为12345678
-  // 在使用路由之前, 使用了koa-bodyparser中间件
-  // 才能在request的body属性中获取值
-  const body = ctx.request.body // 获取到{test: 2}
+  const path = ctx.params
+  const query = ctx.request.query
+  const headers = ctx.request.header
+  const body = ctx.request.body
 
   // 如果query为空对象, 则抛出相应错误
   if (JSON.stringify(query) === '{}') {
     // 创建error对象之后, 在上面挂载相应的状态
-    const error = new Error('错误信息')
-    error.errorCode = 10001
-    error.status = 400
-    error.requestUrl = `${ctx.method} ${ctx.path}`
+    const error = new HttpException('参数错误', 10001, 400)
     throw error
   }
   ctx.body = { key: '获取参数成功' }
