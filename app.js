@@ -1,16 +1,12 @@
 const Koa = require('koa')
-const Router = require('koa-router')
+const user = require('./api/v1/user')
+const deploy = require('./api/v1/deploy')
 
 const app = new Koa()
-const router = new Router() // 实例化router
 
-// 编写路由
-router.get('/api/v1/login', (ctx, next) => {
-  ctx.body = { key: '登录失败' }
-})
-
-// 注册
-app.use(router.routes())
+// 统一在app.js中注册路由
+app.use(user.routes())
+app.use(deploy.routes())
 
 // 监听3000端口
 app.listen(3000)
