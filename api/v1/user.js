@@ -5,5 +5,5 @@ const router = new Router() // 实例化router
 router.get('/api/v1/login', (ctx, next) => {
   ctx.body = { key: '用户登录失败' }
 })
-// 导出路由
+// 由于需要批量自动导入, 这里必须采用默认导出形式
 module.exports = router
