@@ -8,4 +8,10 @@ module.exports = {
     user: 'root',
     password: 'itor',
   },
+  security: {
+    // 生成令牌所需的私有key
+    secretKey: 'asdc123dad',
+    // 令牌的过期时间, 以秒为单位, 这里用1个小时
+    expiresIn: 60 * 60,
+  },
 }
