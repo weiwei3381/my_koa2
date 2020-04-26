@@ -1,4 +1,3 @@
-// 导入jsonwebtoken模块, 用以生成令牌
 const jwt = require('jsonwebtoken')
 /***
  *

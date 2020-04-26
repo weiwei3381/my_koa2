@@ -46,6 +46,15 @@ class AuthFailed extends HttpException {
   }
 }
 
+class Forbbiden extends HttpException {
+  constructor(msg, errorCode) {
+    super()
+    this.code = 403
+    this.msg = msg || '禁止访问'
+    this.errorCode = errorCode || 10006
+  }
+}
+
 // 使用对象的方式导出多个异常
 module.exports = {
   HttpException,
@@ -53,4 +62,5 @@ module.exports = {
   Success,
   NotFound,
   AuthFailed,
+  Forbbiden,
 }
