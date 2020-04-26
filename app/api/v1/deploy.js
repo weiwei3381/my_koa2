@@ -5,8 +5,8 @@ const router = new Router({
   prefix: '/v1/deploy',
 })
 
-// Auth
-router.get('/getSetting', new Auth().m, async (ctx) => {
+// Auth中可以传入api的权限等级, 等级越高, 所需的权限就越高
+router.get('/getSetting', new Auth(12).m, async (ctx) => {
   ctx.body = ctx.auth
 })
 

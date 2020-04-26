@@ -4,6 +4,7 @@ const { LoginType } = require('../../lib/enum')
 const { User } = require('../../models/user')
 const { ParameterException } = require('../../../core/http-exception')
 const { generateToken } = require('../../../core/util')
+const { Auth } = require('../../../middlewares/auth')
 
 const router = new Router({
   prefix: '/v1/token',
@@ -33,7 +34,7 @@ router.post('/', async (ctx) => {
 async function emailLogin(account, secret) {
   const user = await User.verifyEmailPassword(account, secret)
   // 获得用户后生成令牌
-  return generateToken(user.id, 2)
+  return generateToken(user.id, Auth.USER)
 }
 
 module.exports = router
