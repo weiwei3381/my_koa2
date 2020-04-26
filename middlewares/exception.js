@@ -1,3 +1,4 @@
+// 导入HttpException类, 以便进行判定
 const { HttpException } = require('../core/http-exception')
 
 const catchError = async (ctx, next) => {
@@ -14,6 +15,14 @@ const catchError = async (ctx, next) => {
       }
       // http状态码直接写到ctx上
       ctx.status = error.code
+    } else {
+      // 处理未知异常
+      ctx.body = {
+        msg: '服务器错误',
+        errorCode: 999,
+        requestUrl: `${ctx.method} ${ctx.path}`,
+      }
+      ctx.status = 500
     }
   }
 }
