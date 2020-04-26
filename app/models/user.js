@@ -12,7 +12,10 @@ User.init(
       autoIncrement: true, // 自增
     },
     nickname: Sequelize.STRING,
-    email: Sequelize.STRING,
+    email: {
+      type: Sequelize.STRING(128),
+      unique: true,
+    },
     password: Sequelize.STRING,
     openid: {
       // 更加详细的设置每个属性的长度, 是否唯一等
@@ -22,3 +25,5 @@ User.init(
   },
   { sequelize, tableName: 'user' }
 )
+
+module.exports = { User }
