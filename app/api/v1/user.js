@@ -7,6 +7,7 @@ const router = new Router({
   prefix: '/v1/user',
 })
 
+// 注册
 router.post('/register', async (ctx) => {
   const v = await new RegisterValidator().validate(ctx)
   const user = {
@@ -14,9 +15,7 @@ router.post('/register', async (ctx) => {
     password: v.get('body.password1'),
     nickname: v.get('body.email'),
   }
-  // create是异步调用, 返回一个promise对象, 需要用await接收
   await User.create(user)
-  // 抛出成功的情况
   throw new Success()
 })
 

@@ -30,7 +30,7 @@ const sequelize = new Sequelize(dbName, user, password, {
 
 // 将定义的模型同步到数据库上, force表示强制更新, 会丢失数据
 sequelize.sync({
-  force: true,
+  force: false,
 })
 
 module.exports = { sequelize }

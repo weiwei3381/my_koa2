@@ -1,8 +1,29 @@
 const bcrypt = require('bcryptjs') // 导入加密模块
 const { Sequelize, Model } = require('sequelize')
 const { sequelize } = require('../../core/db')
+const { NotFound, AuthFailed } = require('../../core/http-exception')
 
-class User extends Model {}
+class User extends Model {
+  // 验证用户密码是否正确
+  static async verifyEmailPassword(email, plainPassword) {
+    // 判断用户名是这个邮箱的用户存在否
+    const user = await this.findOne({
+      where: {
+        email: email,
+      },
+    })
+    if (!user) {
+      throw new AuthFailed('账号不存在')
+    }
+    // 使用bcrypt进行密码比对
+    const correct = bcrypt.compareSync(plainPassword, user.password)
+    if (!correct) {
+      throw new AuthFailed('密码错误')
+    }
+    // 如果不出问题, 则返回该用户信息
+    return user
+  }
+}
 
 // 其实不用显式设置主键id
 User.init(
