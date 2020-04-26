@@ -10,6 +10,7 @@ class InitManager {
     InitManager.app = app
     // 使用静态方法需要用`类名.方法()`进行调用
     InitManager.initLoadRouters()
+    InitManager.loadConfig()
   }
 
   /**
@@ -30,6 +31,13 @@ class InitManager {
         InitManager.app.use(obj.routes())
       }
     }
+  }
+
+  // 在全局变量中加载config
+  static loadConfig(path = '') {
+    const configPath = path || process.cwd() + '/config/config.js'
+    const config = require(configPath)
+    global.config = config
   }
 }
 
