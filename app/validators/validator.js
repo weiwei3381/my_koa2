@@ -23,7 +23,7 @@ class RegisterValidator extends LinValidator {
     ]
     this.password2 = this.password1
     this.nickname = [
-      new Rule('isLength', '昵称至少4个字符, 最多32个', { min: 4, max: 32 }),
+      new Rule('isLength', '昵称至少1个字符, 最多32个', { min: 1, max: 32 }),
     ]
   }
 
@@ -75,8 +75,27 @@ class TokenValidator extends LinValidator {
   }
 }
 
+// 定义增加电影的验证器
+class MovieAddValidator extends LinValidator {
+  constructor() {
+    super()
+    this.title = [new Rule('isLength', '标题至少1个字符', { min: 1 })]
+    this.content = [new Rule('isLength', '内容至少4个字符', { min: 4 })]
+  }
+}
+
+// 定义增加电影的验证器
+class MovieGetValidator extends LinValidator {
+  constructor() {
+    super()
+    this.id = [new Rule('isInt', '需要传递电影id', { min: 1 })]
+  }
+}
+
 module.exports = {
   PositiveIntegerValidator,
   RegisterValidator,
   TokenValidator,
+  MovieAddValidator,
+  MovieGetValidator,
 }

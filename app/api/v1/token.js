@@ -20,10 +20,7 @@ router.post('/', async (ctx) => {
 
   switch (type) {
     case LoginType.USER_EMAIL:
-      // 返回jwt令牌
       token = await emailLogin(account, secret)
-      break
-    case LoginType.USER_MINI_PROGRAM:
       break
     default:
       throw new ParameterException('没有相应的处理函数')
