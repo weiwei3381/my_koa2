@@ -1,0 +1,94 @@
+{
+	"variables": [],
+	"info": {
+		"name": "koa2",
+		"_postman_id": "e6d0537f-541b-1af5-6ea8-dd5e106a9144",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "用户注册",
+			"request": {
+				"url": "localhost:3000/v1/user/register",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\":\"123456@qq.com\",\n\t\"nickname\":\"小熊\",\n\t\"password1\":\"123456a\",\n\t\"password2\":\"123456a\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "用户登录并获取令牌",
+			"request": {
+				"url": "localhost:3000/v1/token/",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"account\":\"123456@qq.com\",\n\t\"secret\": \"123456a\",\n\t\"type\":101\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "(需要验证)增加电影",
+			"request": {
+				"url": "localhost:3000/v1/user/movie/add",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					},
+					{
+						"key": "token",
+						"value": "123456",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SjFhV1FpT2pFc0luTmpiM0JsSWpvNExDSnBZWFFpT2pFMU9EZ3dOVGc0T1RRc0ltVjRjQ0k2TVRVNE9EQTJNalE1TkgwLmtnVTM1MUd2ZWRsM2d2UG12YjRpVzFVcnNJS1FVTTl0aFd0YnI3bHRJc0E6",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "title",
+							"value": "X战警：逆转未来",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "content",
+							"value": "故事的设定发生在当下，变种人族群遭到了前所未有的毁灭性打击，而这一切的根源是“魔形女”瑞文（詹妮弗·劳伦斯 Jennifer Lawrence 饰）在1973年刺杀了玻利瓦尔·特拉斯克（彼特·丁拉基 Peter Dinklage 饰）。在得知“幻影猫”（艾伦·佩吉 E llen Page 饰）利用穿越时空的能力帮助Blink（范冰冰 饰）等战友逃脱巨型机器人“哨兵”的追杀后，X教授（帕特里克·斯图尔特 Patrick Stewart 饰）和万磁王（伊恩·麦克莱恩 Ian McKellen 饰）达成认同，决定让金刚狼（休·杰克曼 Hugh Jackman 饰）穿越回1973年，找到年轻的X教授（詹姆斯·麦卡沃伊 James McAvoy 饰）和年轻的万磁王（迈克尔·法斯宾德 Michael Fassbender 饰）并说服他们一起阻止魔形女的行动。",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
