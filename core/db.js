@@ -1,5 +1,5 @@
-// 引入sequelize, 文档地址: https://sequelize.org/v5/
-const Sequelize = require('sequelize')
+const { Sequelize, Model } = require('sequelize')
+const { unset, clone, isArray } = require('lodash')
 
 // 解构获取database参数
 const {
@@ -32,5 +32,19 @@ const sequelize = new Sequelize(dbName, user, password, {
 sequelize.sync({
   force: false,
 })
+
+// 在Model基类上定义toJSON方法排除3个日期字段
+Model.prototype.toJSON = function () {
+  let data = clone(this.dataValues)
+  unset(data, 'updated_at')
+  unset(data, 'created_at')
+  unset(data, 'deleted_at')
+  // 如果对象有exclude数组, 则在序列化的时候排除指定属性
+  if (isArray(this.exclude)) {
+    this.exclude.forEach((value) => unset(data, value))
+  }
+
+  return data
+}
 
 module.exports = { sequelize }

@@ -23,6 +23,13 @@ class Movie extends Model {
     }
     return movie
   }
+
+  // toJSON() {
+  //   return {
+  //     title: this.getDataValue('title'),
+  //     content: this.getDataValue('content'),
+  //   }
+  // }
 }
 
 // 电影模型类进行初始化, 第1个参数是classic模型的属性,使用classicFields

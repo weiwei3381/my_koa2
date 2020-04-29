@@ -45,6 +45,8 @@ router.get('/movie/:id', new Auth(2).m, async (ctx) => {
   // movie.dataValues.addAttrib = '增加的属性'
   // 但是不推荐这种写法, sequlize提供了增加属性的方法时
   movie.setDataValue('addAttrib', '增加的属性')
+  // 指定排除的属性
+  movie.exclude = ['pubdate']
   ctx.body = movie
 })
 
